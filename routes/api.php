@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\StockController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::middleware('auth:api')->prefix('products')->group(function () {
     Route::apiResource('product', ProductController::class);
 });
 
+Route::apiResource('stocks', StockController::class)->middleware('auth:api');
 Route::middleware('auth:api')->get('/test', function () {
     return 'Hello';
 });

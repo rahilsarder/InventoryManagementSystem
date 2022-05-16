@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Products;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(['data' => Products::with(['category', 'stock'])->get()]);
+        //
     }
 
     /**
@@ -26,11 +24,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validated_req = $request->validate(['name' => 'required|string|unique:products,name', 'category_id' => 'required']);
-
-        $product = Products::insert($request->all());
-
-        return $product ? response()->json(['message' => 'Product stored successfully', 'data' => $product]) : response()->json(['message' => "Something went wrong"]);
+        //
     }
 
     /**
@@ -41,8 +35,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Products::find($id);
-        return $product ? response()->json(['message' => 'Product Found', 'data' => $product]) : response()->json(['message' => 'Product doesnt exist']);
+        //
     }
 
     /**
@@ -65,6 +58,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        return Products::find($id)->delete() ? response()->json(['message' => 'Item deleted Successfully']) : response()->json(['message' => 'Item doesnt exist']);
+        //
     }
 }

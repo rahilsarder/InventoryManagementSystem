@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index(Categories $category)
     {
         return response()->json([
-            'data' => $category->all()
+            'data' => $category->with('products')->get()
         ]);
     }
 
