@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RolesNPermissions;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
@@ -13,7 +15,7 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        return Permission::all();
     }
 
     /**
@@ -24,7 +26,13 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated_req = $request->validate([
+            'name' => 'required|string',
+        ]);
+
+        return Permission::create([
+            'name' => $request->name,
+        ]);
     }
 
     /**

@@ -1,19 +1,24 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\RolesNPermissions;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+
 
 class RolesController extends Controller
 {
-    // Roles
+
 
     public function index()
     {
+        return Role::all();
     }
 
     public function store(Request $request)
     {
+        return Role::create(['name' => $request->name]);
     }
 
     public function show($id)
