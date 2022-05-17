@@ -25,10 +25,13 @@ use Illuminate\Support\Facades\Route;
 
 // xxxxxxxxxxxxxxxxxxx      Roles & Permissions     xxxxxxxxxxxxxxxxxxxx
 
-Route::apiResource('permissions', PermissionsController::class);
-Route::apiResource('roles', RolesController::class);
-Route::apiResource('user/roles', AssignUserRoles::class);
-Route::apiResource('roles/assign', AssignPermissionsToRoles::class);
+Route::middleware('role_or_permission:Super Admin')->group(function () {
+    Route::apiResource('permissions', PermissionsController::class);
+    Route::apiResource('roles', RolesController::class);
+    Route::apiResource('user/roles', AssignUserRoles::class);
+    Route::apiResource('roles/assign', AssignPermissionsToRoles::class);
+});
+
 
 // xxxxxxxxxxxxxxxxxxx      Authentication     xxxxxxxxxxxxxxxxxxxx
 
@@ -36,6 +39,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/signup', [AuthController::class, 'signup']);
 });
+
 
 // xxxxxxxxxxxxxxxxxxx      Inventory CRUD     xxxxxxxxxxxxxxxxxxxx
 
