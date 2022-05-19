@@ -9,6 +9,7 @@ use App\Http\Controllers\RolesNPermissions\AssignUserRoles;
 use App\Http\Controllers\RolesNPermissions\RolesController;
 use App\Http\Controllers\RolesNPermissions\PermissionsController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,7 @@ Route::prefix('auth')->group(function () {
 
 // xxxxxxxxxxxxxxxxxxx      Inventory CRUD     xxxxxxxxxxxxxxxxxxxx
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api', 'role_or_permission:Super Admin|Write'])->group(function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('product', ProductController::class);
     Route::apiResource('stocks', StockController::class)->middleware('role_or_permission:Super Admin|Write');
